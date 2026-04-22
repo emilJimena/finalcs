@@ -8,14 +8,12 @@
         <p class="page-subtitle">List of all programs</p>
 
         <div class="action-bar">
-            <a href="?controller=program&action=new" class="btn">+ Add New Program</a>
-            <form method="GET" action="" class="search-box">
-                <input type="hidden" name="controller" value="program">
-                <input type="hidden" name="action" value="list">
+            <a href="<?php echo \App\Core\Controller::urlToAction('program', 'new'); ?>" class="btn">+ Add New Program</a>
+            <form method="GET" action="<?php echo \App\Core\Controller::urlToAction('program', 'list'); ?>" class="search-box">
                 <input type="text" name="search" placeholder="Search by code or title..." value="<?php echo htmlspecialchars($searchTerm); ?>">
                 <button type="submit">Search</button>
                 <?php if(!empty($searchTerm)): ?>
-                    <a href="?controller=program&action=list" class="btn btn-secondary" style="padding: 10px 16px;">Clear</a>
+                    <a href="<?php echo \App\Core\Controller::urlToAction('program', 'list'); ?>" class="btn btn-secondary" style="padding: 10px 16px;">Clear</a>
                 <?php endif; ?>
             </form>
         </div>
@@ -42,8 +40,8 @@
                             <td><?php echo htmlspecialchars($program['years']); ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="?controller=program&action=edit&id=<?php echo $program['program_id']; ?>" class="btn-small">Edit</a>
-                                    <a href="?controller=program&action=delete&id=<?php echo $program['program_id']; ?>" class="btn-small btn-small-danger">Delete</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('program', 'edit', ['id' => $program['program_id']]); ?>" class="btn-small">Edit</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('program', 'delete', ['id' => $program['program_id']]); ?>" class="btn-small btn-small-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>

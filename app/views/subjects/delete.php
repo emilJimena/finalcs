@@ -25,10 +25,10 @@
                 <p style="margin-top: 10px; color: #856404;">This action cannot be undone.</p>
             </div>
 
-            <form method="POST" action="?controller=subject&action=delete&id=<?php echo $subjectId; ?>">
+            <form method="POST" action="<?php echo \App\Core\Controller::urlToAction('subject', 'delete', ['id' => $subjectId]); ?>">
                 <div class="btn-group">
                     <button type="submit" class="btn btn-danger">Delete Subject</button>
-                    <a href="?controller=subject&action=list" class="btn btn-secondary">Cancel</a>
+                    <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'list'); ?>" class="btn btn-secondary">Cancel</a>
                 </div>
             </form>
         <?php endif; ?>

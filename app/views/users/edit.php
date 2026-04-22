@@ -17,7 +17,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="?controller=user&action=edit&id=<?php echo $userId; ?>">
+        <form method="POST" action="<?php echo \App\Core\Controller::urlToAction('user', 'edit', ['id' => $userId]); ?>">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>
@@ -36,7 +36,7 @@
 
             <div class="btn-group">
                 <button type="submit" class="btn">Update User</button>
-                <a href="?controller=user&action=list" class="btn btn-secondary">Cancel</a>
+                <a href="<?php echo \App\Core\Controller::urlToAction('user', 'list'); ?>" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

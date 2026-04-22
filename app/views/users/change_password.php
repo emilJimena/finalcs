@@ -7,7 +7,7 @@
         <h1>Change Password</h1>
         <p class="page-subtitle">Update your account password</p>
 
-        <?php if(isset($_GET['action']) && $_GET['action'] === 'changePassword' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
+        <?php if(isset($_GET['success']) && $_GET['success'] === '1' && $_SERVER['REQUEST_METHOD'] !== 'POST'): ?>
             <div class="success-message">
                 Password changed successfully!
             </div>
@@ -23,7 +23,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="?controller=user&action=changePassword">
+        <form method="POST" action="<?php echo \App\Core\Controller::urlToAction('user', 'changePassword'); ?>">
             <div class="form-group">
                 <label for="current_password">Current Password</label>
                 <input type="password" id="current_password" name="current_password" required>
@@ -41,7 +41,7 @@
 
             <div class="btn-group">
                 <button type="submit" class="btn">Change Password</button>
-                <a href="?controller=home&action=index" class="btn btn-secondary">Cancel</a>
+                <a href="<?php echo \App\Core\Controller::urlToAction('home', 'index'); ?>" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

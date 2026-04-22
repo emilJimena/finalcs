@@ -11,27 +11,27 @@
             <h2>Available Modules</h2>
             <ul style="margin-top: 20px; list-style-position: inside;">
                 <li style="margin-bottom: 15px;">
-                    <a href="?controller=subject&action=list" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'list'); ?>" style="color: #3498db; text-decoration: none; font-weight: 500;">
                         📚 Subject Management
                     </a>
                     <p style="margin-left: 20px; color: #7f8c8d; font-size: 0.9em;">View and manage subjects</p>
                 </li>
                 <li style="margin-bottom: 15px;">
-                    <a href="?controller=program&action=list" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href="<?php echo \App\Core\Controller::urlToAction('program', 'list'); ?>" style="color: #3498db; text-decoration: none; font-weight: 500;">
                         🎓 Program Management
                     </a>
                     <p style="margin-left: 20px; color: #7f8c8d; font-size: 0.9em;">View and manage programs</p>
                 </li>
                 <?php if(\App\Core\Auth::isAdmin()): ?>
                 <li style="margin-bottom: 15px;">
-                    <a href="?controller=user&action=list" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href="<?php echo \App\Core\Controller::urlToAction('user', 'list'); ?>" style="color: #3498db; text-decoration: none; font-weight: 500;">
                         👥 User Management
                     </a>
                     <p style="margin-left: 20px; color: #7f8c8d; font-size: 0.9em;">Admin: Manage system users</p>
                 </li>
                 <?php endif; ?>
                 <li style="margin-bottom: 15px;">
-                    <a href="?controller=user&action=changePassword" style="color: #3498db; text-decoration: none; font-weight: 500;">
+                    <a href="<?php echo \App\Core\Controller::urlToAction('user', 'changePassword'); ?>" style="color: #3498db; text-decoration: none; font-weight: 500;">
                         🔐 Change Password
                     </a>
                     <p style="margin-left: 20px; color: #7f8c8d; font-size: 0.9em;">Update your account password</p>

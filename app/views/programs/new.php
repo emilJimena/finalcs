@@ -17,7 +17,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="?controller=program&action=new">
+        <form method="POST" action="<?php echo \App\Core\Controller::urlToAction('program', 'new'); ?>">
             <div class="form-group">
                 <label for="code">Code</label>
                 <input type="text" id="code" name="code" value="<?php echo htmlspecialchars($code); ?>" required>
@@ -35,7 +35,7 @@
 
             <div class="btn-group">
                 <button type="submit" class="btn">Create Program</button>
-                <a href="?controller=program&action=list" class="btn btn-secondary">Cancel</a>
+                <a href="<?php echo \App\Core\Controller::urlToAction('program', 'list'); ?>" class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

@@ -15,7 +15,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="?controller=auth&action=login">
+        <form method="POST" action="<?php echo \App\Core\Controller::urlToAction('auth', 'login'); ?>">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>

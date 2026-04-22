@@ -8,14 +8,12 @@
         <p class="page-subtitle">List of all subjects</p>
 
         <div class="action-bar">
-            <a href="?controller=subject&action=new" class="btn">+ Add New Subject</a>
-            <form method="GET" action="" class="search-box">
-                <input type="hidden" name="controller" value="subject">
-                <input type="hidden" name="action" value="list">
+            <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'new'); ?>" class="btn">+ Add New Subject</a>
+            <form method="GET" action="<?php echo \App\Core\Controller::urlToAction('subject', 'list'); ?>" class="search-box">
                 <input type="text" name="search" placeholder="Search by code or title..." value="<?php echo htmlspecialchars($searchTerm); ?>">
                 <button type="submit">Search</button>
                 <?php if(!empty($searchTerm)): ?>
-                    <a href="?controller=subject&action=list" class="btn btn-secondary" style="padding: 10px 16px;">Clear</a>
+                    <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'list'); ?>" class="btn btn-secondary" style="padding: 10px 16px;">Clear</a>
                 <?php endif; ?>
             </form>
         </div>
@@ -42,8 +40,8 @@
                             <td><?php echo htmlspecialchars($subject['unit']); ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="?controller=subject&action=edit&id=<?php echo $subject['subject_id']; ?>" class="btn-small">Edit</a>
-                                    <a href="?controller=subject&action=delete&id=<?php echo $subject['subject_id']; ?>" class="btn-small btn-small-danger">Delete</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'edit', ['id' => $subject['subject_id']]); ?>" class="btn-small">Edit</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('subject', 'delete', ['id' => $subject['subject_id']]); ?>" class="btn-small btn-small-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>

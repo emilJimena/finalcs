@@ -295,8 +295,7 @@ class UserController extends Controller
                     $userModel = new User($conn);
                     
                     if ($userModel->updatePassword($currentUser['id'], $newPassword)) {
-                        // Redirect with success message
-                        self::redirectToAction('user', 'changePassword');
+                        self::redirectToAction('user', 'changePassword', ['success' => 1]);
                     } else {
                         $errors[] = "Failed to change password.";
                     }

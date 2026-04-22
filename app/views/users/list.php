@@ -8,7 +8,7 @@
         <p class="page-subtitle">Manage system users (Admin only)</p>
 
         <div class="action-bar">
-            <a href="?controller=user&action=new" class="btn">+ Add New User</a>
+            <a href="<?php echo \App\Core\Controller::urlToAction('user', 'new'); ?>" class="btn">+ Add New User</a>
         </div>
 
         <?php if(empty($users)): ?>
@@ -35,8 +35,8 @@
                             <td><?php echo $u['updated_on'] ? date('M d, Y', strtotime($u['updated_on'])) : '-'; ?></td>
                             <td>
                                 <div class="action-buttons">
-                                    <a href="?controller=user&action=edit&id=<?php echo $u['id']; ?>" class="btn-small">Edit</a>
-                                    <a href="?controller=user&action=delete&id=<?php echo $u['id']; ?>" class="btn-small btn-small-danger">Delete</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('user', 'edit', ['id' => $u['id']]); ?>" class="btn-small">Edit</a>
+                                    <a href="<?php echo \App\Core\Controller::urlToAction('user', 'delete', ['id' => $u['id']]); ?>" class="btn-small btn-small-danger">Delete</a>
                                 </div>
                             </td>
                         </tr>

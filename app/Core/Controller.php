@@ -77,6 +77,65 @@ abstract class Controller
     }
 
     /**
+     * Build the base URL for the current app entrypoint.
+     *
+     * @return string
+     */
+    public static function getBaseUrl()
+    {
+        $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+        $baseUrl = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+
+        return $baseUrl === '/' ? '' : $baseUrl;
+    }
+
+    /**
+     * Build a path-style URL for a controller action.
+     *
+     * @param string $controller
+     * @param string $action
+     * @param array $params
+     * @return string
+     */
+    public static function urlToAction($controller, $action, $params = [])
+    {
+        $controller = strtolower($controller);
+        $action = strtolower($action);
+        $baseUrl = self::getBaseUrl();
+
+        $path = match ("{$controller}.{$action}") {
+            'auth.login' => '/login',
+            'auth.logout' => '/logout',
+            'home.index' => '/home',
+            'subject.list' => '/subjects',
+            'subject.new' => '/subjects/new',
+            'subject.edit' => '/subjects/edit/' . intval($params['id'] ?? 0),
+            'subject.delete' => '/subjects/delete/' . intval($params['id'] ?? 0),
+            'program.list' => '/programs',
+            'program.new' => '/programs/new',
+            'program.edit' => '/programs/edit/' . intval($params['id'] ?? 0),
+            'program.delete' => '/programs/delete/' . intval($params['id'] ?? 0),
+            'user.list' => '/users',
+            'user.new' => '/users/new',
+            'user.edit' => '/users/edit/' . intval($params['id'] ?? 0),
+            'user.delete' => '/users/delete/' . intval($params['id'] ?? 0),
+            'user.changepassword' => '/password',
+            default => "/?controller={$controller}&action={$action}",
+        };
+
+        unset($params['id']);
+
+        if (!empty($params)) {
+            $query = http_build_query($params);
+            if ($query !== '') {
+                $path .= '?' . $query;
+            }
+        }
+
+        return $baseUrl . $path;
+    }
+
+    /**
      * Redirect to a controller action
      * 
      * @param string $controller Controller name
@@ -86,11 +145,7 @@ abstract class Controller
      */
     public static function redirectToAction($controller, $action, $params = [])
     {
-        $url = "?controller={$controller}&action={$action}";
-        foreach ($params as $key => $value) {
-            $url .= "&{$key}={$value}";
-        }
-        self::redirect($url);
+        self::redirect(self::urlToAction($controller, $action, $params));
     }
 
     /**
