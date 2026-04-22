@@ -32,6 +32,7 @@ class Auth
      */
     public function login($username, $password)
     {
+        SessionManager::start();
         $user = $this->userModel->getByUsername($username);
         
         if (!$user) {

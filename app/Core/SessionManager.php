@@ -30,6 +30,7 @@ class SessionManager
      */
     public static function set($key, $value)
     {
+        self::start();
         $_SESSION[$key] = $value;
     }
 
@@ -42,6 +43,7 @@ class SessionManager
      */
     public static function get($key, $default = null)
     {
+        self::start();
         return isset($_SESSION[$key]) ? $_SESSION[$key] : $default;
     }
 
@@ -53,6 +55,7 @@ class SessionManager
      */
     public static function has($key)
     {
+        self::start();
         return isset($_SESSION[$key]);
     }
 
@@ -64,6 +67,7 @@ class SessionManager
      */
     public static function remove($key)
     {
+        self::start();
         if (isset($_SESSION[$key])) {
             unset($_SESSION[$key]);
         }
@@ -76,6 +80,7 @@ class SessionManager
      */
     public static function destroy()
     {
+        self::start();
         $_SESSION = [];
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
@@ -99,6 +104,7 @@ class SessionManager
      */
     public static function all()
     {
+        self::start();
         return $_SESSION;
     }
 
@@ -109,6 +115,7 @@ class SessionManager
      */
     public static function clear()
     {
+        self::start();
         $_SESSION = [];
     }
 }

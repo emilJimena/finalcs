@@ -9,6 +9,12 @@
 define('ROOT_DIR', __DIR__);
 define('PUBLIC_DIR', ROOT_DIR . '/public');
 
+// Load legacy application constants when available.
+$configFile = ROOT_DIR . '/config/config.php';
+if (file_exists($configFile)) {
+    require_once $configFile;
+}
+
 // PSR-4 Autoloader
 spl_autoload_register(function ($class) {
     $prefix = 'App\\';
@@ -65,7 +71,32 @@ if ($databaseUrl) {
     $_ENV['DB_NAME'] = $dbName;
 }
 
+// Keep legacy constant-based code working with env-backed configuration.
+$compatConstants = [
+    'DB_HOST' => getenv('DB_HOST') ?: '127.0.0.1',
+    'DB_USERNAME' => getenv('DB_USERNAME') ?: 'root',
+    'DB_PASSWORD' => getenv('DB_PASSWORD') ?: '',
+    'DB_NAME' => getenv('DB_NAME') ?: 'school',
+    'APP_NAME' => getenv('APP_NAME') ?: 'School Encoding Module',
+    'ACCOUNT_TYPE_ADMIN' => 'admin',
+    'ACCOUNT_TYPE_STAFF' => 'staff',
+    'ACCOUNT_TYPE_TEACHER' => 'teacher',
+    'ACCOUNT_TYPE_STUDENT' => 'student',
+    'SESSION_TIMEOUT' => 3600,
+];
+
+foreach ($compatConstants as $name => $value) {
+    if (!defined($name)) {
+        define($name, $value);
+    }
+}
+
 // Session configuration (must be before session_start())
+$sessionPath = ROOT_DIR . '/var/sessions';
+if (!is_dir($sessionPath)) {
+    mkdir($sessionPath, 0777, true);
+}
+session_save_path($sessionPath);
 ini_set('session.gc_maxlifetime', 3600);
 session_start();
 
