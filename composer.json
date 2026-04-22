@@ -1,0 +1,35 @@
+{
+    "type": "project",
+    "license": "proprietary",
+    "description": "School Management System using Symfony Framework",
+    "require": {
+        "php": ">=7.4",
+        "symfony/console": "^6.4",
+        "symfony/dotenv": "^6.4",
+        "symfony/flex": "^2.0",
+        "symfony/framework-bundle": "^6.4",
+        "symfony/form": "^6.4",
+        "symfony/orm-pack": "^2.4",
+        "symfony/security-bundle": "^6.4",
+        "symfony/twig-bundle": "^6.4",
+        "symfony/validator": "^6.4",
+        "symfony/var-dumper": "^6.4",
+        "symfony/yaml": "^6.4",
+        "doctrine/orm": "^2.16"
+    },
+    "require-dev": {
+        "symfony/maker-bundle": "^1.49"
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.4.*"
+        }
+    }
+}
